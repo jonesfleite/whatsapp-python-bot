@@ -1,40 +1,40 @@
 # WhatsApp Bot
-Demo Bot for api https://chat-api.com/en/swagger.html
+Demo Bot para api https://chat-api.com/en/swagger.html
 
-# Opportunities:
-- The output of the command list
-- The output of the current chat ID
-- The output of the actual server time of the bot running on
-- The output of your name
-- Sending files of different formats (PDF, jpg, doc, mp3, etc.)
-- Sending of prerecorded voice messages
-- Sending of geo-coordinates (locations)
-- Setting up a conference (group)
+# Oportunidades:
+- A saída da lista de comandos
+- A saída do ID de bate-papo atual
+- A saída do horário real do servidor do bot em execução
+- A saída do seu nome
+- Envio de arquivos de diferentes formatos (PDF, jpg, doc, mp3, etc.)
+- Envio de mensagens de voz pré-gravadas
+- Envio de geo-coordenadas (localizações)
+- Configurando uma conferência (grupo)
 
-Attention: To make the bot fully functional, please, always keep your phone online. Your phone should not be used for the WhatsApp Web at the same time.
+Atenção: Para tornar o bot totalmente funcional, por favor, sempre mantenha seu telefone online. Seu telefone não deve ser usado para o WhatsApp Web ao mesmo tempo.
 
-# Getting Started
-At first, let's link up the WhatsApp with our script at once so that we can check the way code works while we're writing one. To do so, we will switch to our account and get a QR code there. Then we open WhatsApp on your mobile phone, go to Settings → WhatsApp Web → Scan the QR code.
+# Começando
+Primeiramente, vamos vincular o WhatsApp ao nosso script de uma vez para que possamos verificar como o código funciona enquanto o escrevemos. Para fazer isso, mudaremos para nossa conta e obteremos um código QR lá. Em seguida, abrimos o WhatsApp no ​​seu celular, vá para Configurações → WhatsApp Web → Digitalize o código QR.
 
-At this point, the WebHook URL must be provided for the server to trigger our script for incoming messages. The WebHook URL is a link to which JSON-data containing information about incoming messages or notifications will be sent using the POST method. So we need a server to make the bot run and this server will accept and process this information. While writing this article, we deployed the server using the FLASK microframework. The FLASK server allows us to conveniently respond to incoming requests and process them.
-> pip install flask
+Neste ponto, o URL do WebHook deve ser fornecido para que o servidor acione nosso script para mensagens recebidas. O URL do WebHook é um link para o qual os dados JSON contendo informações sobre as mensagens recebidas ou notificações serão enviados usando o método POST. Portanto, precisamos de um servidor para fazer o bot rodar e esse servidor aceitará e processará essas informações. Ao escrever este artigo, implantamos o servidor usando o microframework FLASK. O servidor FLASK nos permite responder convenientemente às solicitações recebidas e processá-las.
+> frasco de instalação pip
 
-Then clone the repository for yourself.
-Then go to the **wabot.py** file and change the APIUrl and token variables to yours from your personal cabinet
+Em seguida, clone o repositório para você.
+Em seguida, vá para o arquivo ** wabot.py ** e altere as variáveis ​​APIUrl e token para as suas em seu gabinete pessoal
 https://app.chat-api.com/instance/
 
-Class constructor, the default one that will accept JSON, which will contain information about incoming messages (it will be received by WebHook and forwarded to the class). To see how the received JSON will look like, you can enter the easy-to-use Testing section, available in your cabinet. You can also test WebHook requests in it. https://app.chat-api.com/testing
+Construtor da classe, o padrão que aceitará JSON, que conterá informações sobre as mensagens de entrada (serão recebidas pelo WebHook e encaminhadas para a classe). Para ver como ficará o JSON recebido, você pode entrar na seção de teste fácil de usar, disponível em seu gabinete. Você também pode testar as solicitações do WebHook nele. https://app.chat-api.com/testing
 
-You can view the JSON structure in the testing section of the “Check WebHook” item. It is required to run the check and send messages to your WhatsApp chat. You will see the JSON sent to the WebHook on the display.
+Você pode visualizar a estrutura JSON na seção de teste do item “Check WebHook”. É necessário executar a verificação e enviar mensagens para o chat do WhatsApp. Você verá o JSON enviado para o WebHook no visor.
 
-Copy this JSON and run our local FLASK server with the help of a debugger in the code editor or through the
+Copie este JSON e execute nosso servidor FLASK local com a ajuda de um depurador no editor de código ou através do
 > flask run
 
-In order to emulate the request to the server, we need to send a POST request from JSON, which we copied in the previous step. The request is sent to your localhost address where flask is running. Thus, we can emulate the WebHook actions and test the bot functionality.
+Para emular a solicitação para o servidor, precisamos enviar uma solicitação POST do JSON, que copiamos na etapa anterior. A solicitação é enviada ao endereço do host local onde o flask está sendo executado. Assim, podemos emular as ações do WebHook e testar a funcionalidade do bot.
 
 # Functions
 ## send_request 
-Used to send requests to the site API
+Usado para enviar solicitações à API do site
 ```python
  def send_requests(self, method, data):
         url = f"{self.APIUrl}{method}?token={self.token}"
@@ -42,8 +42,8 @@ Used to send requests to the site API
         answer = requests.post(url, data=json.dumps(data), headers=headers)
         return answer.json()
 ```
-- **method** determines the Chat API method be called.
-- **data** contains the data required for sending.
+- **method** determina o método da API de bate-papo a ser chamado.
+- **data** contém os dados necessários para o envio.
 
 
 ## send_message
